@@ -1,0 +1,51 @@
+import { useState } from "react"; import { Card, CardContent } from "@/components/ui/card"; import { Button } from "@/components/ui/button"; import { Input } from "@/components/ui/input";
+
+export default function KampotiShop() { const [quantity, setQuantity] = useState(1); const pricePerUnit = 15; // Preis pro Packung in Lari
+
+const totalPrice = pricePerUnit * quantity;
+
+return ( <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6"> <h1 className="text-3xl font-bold mb-6">Kampoti Online Shop</h1>
+
+<Card className="max-w-md w-full shadow-lg rounded-2xl">
+    <CardContent className="p-6 flex flex-col items-center">
+      <img
+        src="https://images.unsplash.com/photo-1606788075761-ef0ab08f2f94"
+        alt="Kampoti"
+        className="w-60 h-60 object-cover rounded-xl mb-4"
+      />
+      <h2 className="text-xl font-semibold mb-2">Kampoti (Getrocknete Früchte)</h2>
+      <p className="text-gray-600 text-center mb-4">
+        Traditionell georgisches Produkt, perfekt als Snack oder Geschenk.
+      </p>
+      <p className="text-lg font-bold mb-4">{pricePerUnit} ₾ / Packung</p>
+
+      <div className="flex items-center gap-2 mb-4">
+        <Button
+          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+          variant="outline"
+        >
+          -
+        </Button>
+        <Input
+          type="number"
+          value={quantity}
+          min={1}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          className="w-16 text-center"
+        />
+        <Button onClick={() => setQuantity(quantity + 1)} variant="outline">
+          +
+        </Button>
+      </div>
+
+      <p className="text-lg mb-4">Gesamt: <b>{totalPrice} ₾</b></p>
+
+      <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+        In den Warenkorb
+      </Button>
+    </CardContent>
+  </Card>
+</div>
+
+); }
+
